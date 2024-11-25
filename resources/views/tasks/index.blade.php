@@ -8,7 +8,11 @@
         <ul class="list-group mt-3">
             @foreach ($tasks as $task)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ $task->title }}
+                    <div>
+                        <strong>{{ $task->title }}</strong>
+                        <br>
+                        <small>{{ $task->due_date ? 'Due: ' . $task->due_date : 'No due date' }}</small>
+                    </div>
                     <span>
                         <a href="{{ route('tasks.edit', $task) }}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">

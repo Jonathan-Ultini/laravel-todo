@@ -36,6 +36,7 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
+        // Verifica che l'utente sia il proprietario dell'attività
         if ($task->user_id !== Auth::id()) {
             abort(403);
         }
@@ -45,6 +46,7 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
+        // Verifica che l'utente sia il proprietario dell'attività
         if ($task->user_id !== Auth::id()) {
             abort(403);
         }
