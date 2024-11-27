@@ -38,4 +38,9 @@ Route::middleware(['auth'])->group(function () {
     // Task Complete
     Route::post('/tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
     Route::get('/tasks/completed', [TaskController::class, 'completed'])->name('tasks.completed');
+
+    // eliminzaione task
+    Route::middleware(['auth'])->group(function () {
+        Route::post('/tasks/force-delete-all', [TaskController::class, 'forceDeleteAll'])->name('tasks.forceDeleteAll');
+    });
 });

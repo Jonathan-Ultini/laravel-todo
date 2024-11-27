@@ -123,4 +123,12 @@ class TaskController extends Controller
 
         return view('tasks.completed', compact('tasks'));
     }
+
+
+    //bottone elimina tutte 
+    public function forceDeleteAll()
+    {
+        Task::whereNotNull('completed_at')->forceDelete(); // Elimina tutte le task completate
+        return redirect()->route('tasks.trash')->with('success', 'All completed tasks have been deleted permanently.');
+    }
 }

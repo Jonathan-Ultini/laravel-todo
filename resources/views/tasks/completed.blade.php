@@ -3,6 +3,13 @@
 @section('content')
     <div class="container">
         <h1>Completed Tasks</h1>
+
+        <!-- Bottone per eliminare tutte le task completate -->
+        <form action="{{ route('tasks.forceDeleteAll') }}" method="POST" class="d-inline mb-3">
+            @csrf
+            <button type="submit" class="btn btn-danger">Delete All Completed Tasks</button>
+        </form>
+
         <a href="{{ route('tasks.index') }}" class="btn btn-primary">Back to Tasks</a>
 
         @if ($tasks->isEmpty())
