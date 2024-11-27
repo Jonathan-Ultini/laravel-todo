@@ -28,4 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
     Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
+
+    Route::get('/tasks/trash', [TaskController::class, 'trash'])->name('tasks.trash');
+    Route::post('/tasks/{id}/restore', [TaskController::class, 'restore'])->name('tasks.restore');
+    Route::delete('/tasks/{id}/force-delete', [TaskController::class, 'forceDelete'])->name('tasks.forceDelete');
 });

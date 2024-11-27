@@ -73,4 +73,29 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.index')->with('success', 'Task deleted successfully!');
     }
+
+    // Mostra il cestino
+    public function trash()
+    {
+        $trashedTasks = Task::onlyTrashed()->get(); // Recupera solo i record eliminati
+        return view('tasks.trash', compact('trashedTasks'));
+    }
+
+    // Ripristina un'attività
+    public function restore($id)
+    {
+        $task = Task::onlyTrashed()->findOrFail($id);
+        $task->restore();
+
+        return redirect()->route('tasks.trash')->with('success', 'Task restored successfully!');
+    }
+
+    // Elimina definitivamente un'attività
+    public function forceDelete($id)
+    {
+        $task = Task::onlyTrashed()->findOrFail($id);
+        $task->forceDelete();
+
+        return redirect()->route('tasks.trash')->with('success', 'Task permanently deleted!');
+    }
 }
