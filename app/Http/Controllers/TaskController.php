@@ -98,4 +98,21 @@ class TaskController extends Controller
 
         return redirect()->route('tasks.trash')->with('success', 'Task permanently deleted!');
     }
+
+    //completa una task
+    public function complete(Task $task)
+    {
+        $task->update(['completed_at' => now()]);
+
+        return redirect()->route('tasks.index')->with('success', 'Task marked as completed!');
+    }
+
+
+    //visualizza le task complete
+    public function completed()
+    {
+        $tasks = Task::whereNotNull('completed_at')->orderBy('completed_at', 'desc')->get();
+
+        return view('tasks.completed', compact('tasks'));
+    }
 }

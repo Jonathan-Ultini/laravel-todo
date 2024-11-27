@@ -34,4 +34,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tasks/trash', [TaskController::class, 'trash'])->name('tasks.trash'); // Visualizza cestino
     Route::post('/tasks/{id}/restore', [TaskController::class, 'restore'])->name('tasks.restore'); // Ripristina
     Route::delete('/tasks/{id}/force-delete', [TaskController::class, 'forceDelete'])->name('tasks.forceDelete'); // Elimina definitiva
+
+    // Task Complete
+    Route::post('/tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
+    Route::get('/tasks/completed', [TaskController::class, 'completed'])->name('tasks.completed');
 });
