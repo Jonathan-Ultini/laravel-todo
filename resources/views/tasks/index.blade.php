@@ -17,6 +17,10 @@
                         <small>{{ $task->due_date ? 'Due: ' . $task->due_date : 'No due date' }}</small>
                     </div>
                     <span>
+                        <form action="{{ route('tasks.complete', $task) }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-success">Complete</button>
+                        </form>
                         <a href="{{ route('tasks.edit', $task) }}" class="btn btn-sm btn-warning">Edit</a>
                         <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
                             @csrf
