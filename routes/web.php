@@ -22,6 +22,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 use App\Http\Controllers\TaskController;
 
 Route::middleware(['auth'])->group(function () {
+    // CRUD Rotte standard
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
     Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
@@ -29,7 +30,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
-    Route::get('/tasks/trash', [TaskController::class, 'trash'])->name('tasks.trash');
-    Route::post('/tasks/{id}/restore', [TaskController::class, 'restore'])->name('tasks.restore');
-    Route::delete('/tasks/{id}/force-delete', [TaskController::class, 'forceDelete'])->name('tasks.forceDelete');
+    // Soft Deletes: Cestino
+    Route::get('/tasks/trash', [TaskController::class, 'trash'])->name('tasks.trash'); // Visualizza cestino
+    Route::post('/tasks/{id}/restore', [TaskController::class, 'restore'])->name('tasks.restore'); // Ripristina
+    Route::delete('/tasks/{id}/force-delete', [TaskController::class, 'forceDelete'])->name('tasks.forceDelete'); // Elimina definitiva
 });
