@@ -10,7 +10,8 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Auth::user()->tasks;
+        $tasks = Task::whereNull('completed_at')->orderBy('due_date', 'asc')->get();
+
         return view('tasks.index', compact('tasks'));
     }
 
@@ -102,8 +103,15 @@ class TaskController extends Controller
     //completa una task
     public function complete(Task $task)
     {
+        // Controlla se la task è già completata
+        if ($task->completed_at) {
+            return redirect()->route('tasks.index')->with('error', 'Task already completed.');
+        }
+
+        // Aggiorna la task con la data di completamento
         $task->update(['completed_at' => now()]);
 
+        // Redirige alla lista delle task con un messaggio di successo
         return redirect()->route('tasks.index')->with('success', 'Task marked as completed!');
     }
 

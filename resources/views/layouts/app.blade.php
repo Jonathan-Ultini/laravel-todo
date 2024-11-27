@@ -44,6 +44,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('tasks.trash') }}">Trash</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tasks.completed') }}">Completed Tasks</a>
+                            </li>
+
                         @endauth
                     </ul>
 
