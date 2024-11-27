@@ -3,7 +3,15 @@
 @section('content')
     <div class="container">
         <h1>Trash</h1>
-        <a href="{{ route('tasks.index') }}" class="btn btn-secondary mb-3">Back to Tasks</a>
+        <!-- Bottone per eliminare tutte le task completate -->
+        <div class="d-flex justify-content-between mb-3">
+            <form action="{{ route('tasks.forceDeleteAll') }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="btn btn-danger">Delete All Completed Tasks</button>
+            </form>
+            <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Back to Tasks</a>
+        </div>
+
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -15,6 +23,7 @@
             <p>No tasks in the trash.</p>
         @else
             <ul class="list-group">
+
                 @foreach ($trashedTasks as $task)
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>

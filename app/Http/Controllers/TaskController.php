@@ -128,7 +128,16 @@ class TaskController extends Controller
     //bottone elimina tutte 
     public function forceDeleteAll()
     {
-        Task::whereNotNull('completed_at')->forceDelete(); // Elimina tutte le task completate
+        // Verifica se ci sono task completate
+        $completedTasks = Task::whereNotNull('completed_at')->get();
+
+        if ($completedTasks->isEmpty()) {
+            return redirect()->route('tasks.trash')->with('info', 'No completed tasks to delete.');
+        }
+
+        // Elimina tutte le task completate
+        Task::whereNotNull('completed_at')->forceDelete();
+
         return redirect()->route('tasks.trash')->with('success', 'All completed tasks have been deleted permanently.');
     }
 }

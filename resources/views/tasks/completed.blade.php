@@ -5,12 +5,14 @@
         <h1>Completed Tasks</h1>
 
         <!-- Bottone per eliminare tutte le task completate -->
-        <form action="{{ route('tasks.forceDeleteAll') }}" method="POST" class="d-inline mb-3">
-            @csrf
-            <button type="submit" class="btn btn-danger">Delete All Completed Tasks</button>
-        </form>
+        <div class="d-flex justify-content-between mb-3">
+            <form action="{{ route('tasks.forceDeleteAll') }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="btn btn-danger">Delete All Completed Tasks</button>
+            </form>
+            <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Back to Tasks</a>
+        </div>
 
-        <a href="{{ route('tasks.index') }}" class="btn btn-primary">Back to Tasks</a>
 
         @if ($tasks->isEmpty())
             <p class="mt-3">No completed tasks found.</p>
